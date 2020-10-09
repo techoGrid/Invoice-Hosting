@@ -1,0 +1,78 @@
+<div  class="container-fluid">
+  <h3 class="text-center">User Details List</h3>
+  <div class="card">
+    
+    <div class="card-header">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Search here...">
+      </mat-form-field>
+    </div> 
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> Sl No. </th>
+        <td mat-cell *matCellDef="let element ;">{{dataSource.filteredData.indexOf(element) + 1}}.</td>
+      </ng-container>
+
+      <ng-container matColumnDef="userId">
+        <th mat-header-cell *matHeaderCellDef [hidden]="show"> Client ID </th>
+        <td mat-cell *matCellDef="let element" [hidden]="show"> {{element.userId}} </td>
+      </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef> User name </th>
+        <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="createdDate">
+        <th mat-header-cell *matHeaderCellDef> Created Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.createdDate}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <!-- <ng-container matColumnDef="designation">
+    <th mat-header-cell *matHeaderCellDef> Desiganation </th>
+    <td mat-cell *matCellDef="let element"> {{element.designation}} </td>
+  </ng-container> -->
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="displayName">
+        <th mat-header-cell *matHeaderCellDef> Display Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.displayName}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="mobile">
+        <th mat-header-cell *matHeaderCellDef> Mobile </th>
+        <td mat-cell *matCellDef="let element"> {{element.mobile}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="icons">
+        <th mat-header-cell *matHeaderCellDef> Edit </th>
+        <td mat-cell *matCellDef="let element" (click)="editUser(this.element.userId)"><a class="edit" title="Edit"
+            data-toggle="tooltip"><i class="fa fa-edit"></i></a></td>
+      </ng-container>
+
+      <ng-container matColumnDef="icon">
+        <th mat-header-cell *matHeaderCellDef> Delete </th>
+        <td mat-cell *matCellDef="let element" (click)="deleteUser(this.element.userId)"><a class="delete"
+            title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+  <br>
+  <br>
+</div>

@@ -1,0 +1,49 @@
+h4 {
+  font-size: 15px;
+  margin: 0;
+}
+.card-header {
+  background-color: lightgray;
+  border: solid 1px;
+  width: 100%;
+  padding: 5px;
+  padding-left: 10px;
+}
+/* .card {
+  border: solid 1px;
+  border-radius: 3px;
+  height: auto;
+  width: 100%;
+  margin-top: 3%;
+  box-shadow: 10px 10px 5px rgb(71, 69, 69);
+} */
+.card-body {
+  margin-top: 2%;
+
+  margin-bottom: 15px;
+  padding-bottom: 20px;
+}
+/* .btn {
+  text-align: center;
+  margin-left: 5%;
+} */
+
+input[type="text"],
+[type="email"],
+select {
+  border-radius: 6px;
+  width: 100%;
+}
+.btn {
+  text-align: center;
+  margin-left: 10%;
+  margin-bottom: 2%;
+  /* margin-left: 300px; */
+}
+
+#success
+{
+    float: right;
+    padding: 10px;
+    margin-top: 5%;
+}

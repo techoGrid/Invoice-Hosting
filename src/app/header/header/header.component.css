@@ -1,0 +1,104 @@
+h5{
+  color:white
+}
+.btn{
+    border-radius: 5px;
+    font-size: small;
+    padding:6px;
+    font-weight: 500;
+}
+#chnbtn
+{
+    margin-left: 12%;
+}
+.modal {
+  background-image: url(/assets/images/GP.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height:100vh;
+}
+.profile-img {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    border: 2px solid #ddd; 
+  }
+  .box {
+    width: 500px;
+    border-radius: 15px;
+    position: absolute;
+    margin-top: 46%;
+    padding: 20px;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    background:linear-gradient(rgb(97, 96, 96),rgb(175, 171, 171));
+    text-align: center;
+    box-shadow: 15px 15px 10px rgb(56, 56, 56);
+  }
+  .box a {
+    color: white;
+  }
+  .box a:hover {
+    color: rgb(45, 109, 219);
+    font-weight: 5000;
+    font-size: medium;
+  }
+  .box h1 {
+    color: white;
+    text-transform: uppercase;
+    /* text-shadow: 2px 2px 5px whitesmoke; */
+  }
+  .box input[type="text"],
+  .box input[type="password"] {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    /* border: 2px solid #3498db; */
+    border: 2px solid white;
+    padding: 14px 10px;
+    width: 300px;
+    outline: none;
+    color: white;
+    border-radius: 15px;
+    transition: 0.25s;
+  }
+  
+  .box input[type="text"]:focus,
+  .box input[type="password"]:focus {
+    width: 350px;
+    border-color: #82c59e;
+    box-shadow: 0 0 4px 2px white;
+  }
+  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: whitesmoke;
+    opacity: 1; /* Firefox */
+  }
+  .box input[type="submit"] {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid white;
+    padding: 14px 40px;
+    /* width: 200px; */
+    outline: none;
+    color: white;
+    border-radius: 15px;
+    transition: 0.25s;
+    cursor: pointer;
+  }
+  
+  .box input[type="submit"]:hover {
+    background: rgb(84, 112, 195);
+    border-color: #82c59e;
+    box-shadow: 0 0 4px 2px white;
+  }

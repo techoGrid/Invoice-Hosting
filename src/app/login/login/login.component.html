@@ -1,0 +1,22 @@
+
+    <figure>
+        <img src="assets/images/GP.jpg" alt="" srcset="" class="img">
+    </figure>
+<form class="box" action="" [formGroup]='formGroup' (submit)='logIn()'>
+    <h1 class="text-center login-title">Login</h1>
+    <img class="profile-img" src="assets/images/user1.png" alt="">
+    <h4 style="color : red" *ngIf='error'>{{error}}</h4>
+    <input type="text"  placeholder="Enter Your User Name" formControlName='username'
+        id="username" [(ngModel)]="username" (input)="validateUsername();">
+        <span style="color : red" *ngIf='usernameError'>{{usernameError}}</span>
+    <input type="password" #pwd placeholder="Enter Your Password" id="password"  formControlName='password'
+        [(ngModel)]="password" (input)="validatePassword();">
+        <span style="color : red" *ngIf='passwordError'>{{passwordError}}</span>
+        <div class="form-group">
+            <input type="checkbox" name="remember-me" id="remember-me" />
+            <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+          </div>
+    <input type="submit" value="Log In" >
+    <a routerLink="forgot" class="pull-right need-help">Forgot Password ? </a><span class="clearfix"></span>
+</form>
+

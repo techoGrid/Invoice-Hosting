@@ -1,0 +1,255 @@
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <h4><i class="fa fa-user-plus"></i>&nbsp;&nbsp;<b>Create Client</b></h4>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="clientCreation" #f="ngForm" class="form-horizontal" id="client_create" method="post">
+                <div class="col-md-offset-1 col-md-5">
+                    <label for="inputClientName" class="control-label col-xs-4">Client
+                        Name <i class="fa fa-asterisks text-danger">*</i>
+                    </label>
+                    <div class="form-group">
+                        <div class="col-xs-6 left">
+                            <input type="text" name="clientname" ngModel class="form-control" id="inputUserName"
+                                placeholder="Client Name" maxlength="50" autocomplete="off" formControlName="clientname">
+                            <div class="alert alert-danger"
+                                *ngIf="clientCreation.get('clientname').touched && clientCreation.get('clientname').invalid">
+                                <div *ngIf="clientCreation.get('clientname').errors.required">Client Name Required</div>
+                                <div *ngIf="clientCreation.get('clientname').errors.maxlength">Client Name Should
+                                    Contains AtMost 50
+                                    character
+                                </div>
+                                <div *ngIf="clientCreation.get('clientname').errors.pattern">Client Name should contains
+                                    only alphabets
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Address -->
+                    <label for="inputaddress" class="control-label col-xs-4">Address <i
+                            class="fa fa-asterisks text-danger">*</i> </label>
+                    <div class="form-group">
+                        <div class="col-xs-6 left">
+                            <input type="text" name="address" ngModel class="form-control" id="inputDisplayname"
+                                placeholder="Address" autocomplete="off" maxlength="150" formControlName="address">
+                            <div class="alert alert-danger"
+                                *ngIf="clientCreation.get('address').touched && clientCreation.get('address').invalid">
+
+                                <div *ngIf="clientCreation.get('address').errors.required">Address is Required</div>
+                                <div *ngIf="clientCreation.get('address').errors.maxlength">Address Should
+                                    Contains AtMost 150
+                                    character
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--city  -->
+                    <label for="inputcity" class="control-label col-xs-4">City <i
+                            class="fa fa-asterisks text-danger">*</i> </label>
+                    <div class="form-group">
+                        <div class="col-xs-6 left">
+                            <input type="text" name="clientCity" ngModel class="form-control" id="inputcity"
+                                placeholder="City" autocomplete="off" maxlength="50" formControlName="clientCity">
+                            <div class="alert alert-danger"
+                                *ngIf="clientCreation.get('clientCity').touched && clientCreation.get('clientCity').invalid">
+                                <div *ngIf="clientCreation.get('clientCity').errors.required">City Name Required</div>
+                                <div *ngIf="clientCreation.get('clientCity').errors.maxlength">City Name Should
+                                    Contains AtMost 50
+                                    character
+                                </div>
+                                <div *ngIf="clientCreation.get('clientCity').errors.pattern">City Name should contains
+                                    only alphabets
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--State  -->
+                    <label for="inputState" class="control-label col-xs-4">State <i
+                            class="fa fa-asterisks text-danger">*</i> </label>
+                    <div class="form-group">
+                        <div class="col-xs-6 left">
+                            <input type="text" name="clientState" ngModel class="form-control" id="inputState"
+                                placeholder="State" autocomplete="off" maxlength="50" formControlName="clientState">
+                            <div class="alert alert-danger"
+                                *ngIf="clientCreation.get('clientState').touched && clientCreation.get('clientState').invalid">
+                                <div *ngIf="clientCreation.get('clientState').errors.required">State Name Required</div>
+                                <div *ngIf="clientCreation.get('clientState').errors.maxlength">City Name Should
+                                    Contains AtMost 50
+                                    character
+                                </div>
+                                <div *ngIf="clientCreation.get('clientState').errors.pattern">State Name should contains
+                                    only alphabets
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pin Code -->
+                    <label for="client_pinCode" class="control-label col-xs-4">Pin Code <i
+                            class="fa fa-asterisks text-danger">*</i></label>
+                    <div class="form-group">
+                        <div class="col-xs-6 left">
+                            <input type="text" name="clientPinCode" ngModel class="form-control" id="clientPinCode"
+                                placeholder="Pin Code" maxlength="6" autocomplete="off" formControlName="clientPinCode">
+                            <div class="alert alert-danger"
+                                *ngIf="clientCreation.get('clientPinCode').touched && clientCreation.get('clientPinCode').invalid">
+
+                                <div *ngIf="clientCreation.get('clientPinCode').errors.required">PinCode Name Required
+                                </div>
+                                <div *ngIf="clientCreation.get('clientPinCode').errors.pattern">PinCode should contains
+                                    Exactly 6 Numbers
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mobile -->
+                    <label for="client_inputMobile" class="control-label col-xs-4">Mobile <i
+                            class="fa fa-asterisks text-danger">*</i></label>
+                    <div class="form-group">
+                        <div class="col-xs-6 left">
+                            <input type="text" name="clientMobile" maxlength="10" ngModel class="form-control"
+                                id="client_inputMobile" placeholder="Mobile" style="width: 100%;" autocomplete="off"
+                                formControlName="clientMobile">
+                            <div class="alert alert-danger"
+                                *ngIf="clientCreation.get('clientMobile').touched && clientCreation.get('clientMobile').invalid">
+
+                                <div *ngIf="clientCreation.get('clientMobile').errors.required">Mobile Number Is
+                                    Required</div>
+
+                                <div *ngIf="clientCreation.get('clientMobile').errors.pattern">Please provide the mobile number which consists of 10 number</div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Phone Number -->
+                    <label for="client_inputOfficePhone" class="control-label col-xs-4">Telephone (O) <i
+                            class="fa fa-asterisks text-danger">*</i></label>
+                    <div class="form-group">
+                        <div class="col-xs-6 left">
+                            <input type="text" name="officePhone" ngModel class="form-control"
+                                id="client_inputOfficePhone" maxlength="10" style="width: 100%;"
+                                placeholder="Office Phone Number" autocomplete="off" formControlName="officePhone">
+                            <div class="alert alert-danger"
+                                *ngIf="clientCreation.get('officePhone').touched && clientCreation.get('officePhone').invalid">
+                                <div *ngIf="clientCreation.get('officePhone').errors.required">Telephone Number Is
+                                    Required</div>
+
+                                <div *ngIf="clientCreation.get('officePhone').errors.pattern">
+                                    Please provide the Telephone number which consists of 10 number</div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--End of col-xs-6  -->
+
+                <div class="col-md-5">
+                    <!--Email  -->
+                    <label for="inputClientEmail" class="control-label col-xs-4">Email <i
+                            class="fa fa-asterisks text-danger">*</i></label>
+                    <div class="form-group">
+                        <div class="col-xs-6 left">
+                            <input type="email" name="clientEmail1" ngModel class="form-control" id="inputClientEmail"
+                                placeholder="Email ID" autocomplete="off" formControlName="clientEmail1">
+                            <div class="alert alert-danger"
+                                *ngIf="clientCreation.get('clientEmail1').touched && clientCreation.get('clientEmail1').invalid">
+                                <div *ngIf="clientCreation.get('clientEmail1').errors.required">Email Address Required
+                                </div>
+                                <div *ngIf="clientCreation.get('clientEmail1').errors.pattern">Please provide valid Email
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <label class="control-label col-xs-4">PAN No. <i class="fas fa-asterisks text-danger">*</i></label>
+                    <div class="form-group">
+                        <div class="col-xs-6 left">
+                            <input type="text" name="panNo" class="form-control" id="panNo"
+                                placeholder="10 Digit PAN Number" ngModel autocomplete="off"
+                                (keyup)="checkpanNo($event)" formControlName="panNo" maxlength="10">
+
+                            <div *ngIf="clientCreation.get('panNo').invalid && (clientCreation.get('panNo').dirty || clientCreation.get('panNo').touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="clientCreation.get('panNo').errors.required">Pan No Required</div>
+                                <div *ngIf="clientCreation.get('panNo').errors.pattern">Please Provide Correct Pan No
+                                </div>
+                            </div>
+
+                            <div *ngIf="panNumberAlreadyExist" class="alert alert-danger"> PAN Number is Already
+                                Exist...Please Change the PAN Number</div>
+                        </div>
+                    </div>
+                    <label class="control-label col-xs-4">GSTIN <i class="fa fa-asterisks text-danger">*</i></label>
+                    <div class="form-group">
+                        <div class="col-xs-6 left">
+                            <input type="text" name="gstin" ngModel class="form-control" id="client.gstin"
+                                placeholder="15 Digit GSTIN Number" autocomplete="off" (keyup)="checkGstNo($event)"
+                                formControlName="gstin">
+
+                            <div *ngIf="clientCreation.get('gstin').invalid && (clientCreation.get('gstin').dirty || clientCreation.get('gstin').touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="clientCreation.get('gstin').errors.required">GSTIN Number Required</div>
+                                <div *ngIf="clientCreation.get('gstin').errors.pattern">Please Provide Correct GSTIN
+                                </div>
+                            </div>
+                            <div *ngIf="gstinNumberAlreadyExist" class="alert alert-danger"> GSTIN Number is Already
+                                Exist...Please
+                                Change the GSTIN Number</div>
+                        </div>
+                    </div>
+
+                    <label class="control-label col-xs-4">ST No.</label>
+                    <div class="form-group">
+                        <div class="col-xs-6 left">
+                            <input type="text" name="stNo" ngModel class="form-control" id="st_number"
+                                placeholder="15 Digit Service Tax Number" autocomplete="off" formControlName="stNo">
+                        </div>
+                    </div>
+
+                    <label class="control-label col-xs-4">VAT No.</label>
+                    <div class="form-group">
+                        <div class="col-xs-6 left">
+                            <input type="text" name="vatNo" ngModel class="form-control" id="vatNo"
+                                placeholder="Value Added Tax Number" autocomplete="off" formControlName="vatNo">
+                        </div>
+                    </div>
+
+                    <label class="control-label col-xs-4">CST No.</label>
+                    <div class="form-group">
+                        <div class="col-xs-6 left">
+                            <input type="text" name="cstNo" ngModel class="form-control" id="cstNo"
+                                placeholder="CST Number" autocomplete="off" formControlName="cstNo">
+                        </div>
+                    </div>
+
+                    <label class="control-label col-xs-4">TAN No.</label>
+                    <div class="form-group">
+                        <div class="col-xs-6 left">
+                            <input type="text" name="tanNo" ngModel class="form-control" id="tanNo"
+                                placeholder="TAN Number" autocomplete="off" formControlName="tanNo">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row text-center">
+                    <div class="btn">
+                        <button type="submit" class="btn btn-primary" [disabled]="clientCreation.invalid"
+                            (click)="onSubmit()" id="createClient">Create
+                            Cilent</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

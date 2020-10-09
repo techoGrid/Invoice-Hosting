@@ -1,0 +1,50 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body 
+{ 
+    height: 100%; 
+    width: 100%;
+}
+body 
+{ 
+    margin: 0; 
+    background-color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+    
+    .alert {
+        padding:5px;
+        padding-left: 12px;
+        border-radius: 6px;
+        margin-bottom: 10px;
+        border: 1px solid transparent;
+    }
+    /* .form-control.ng-touched.ng-invalid {
+        border: 2px solid rgb(243, 148, 148);
+      } */
+    .msg{
+        top: 0;
+        left:100;
+        margin-left: 80%;
+    }
+    a:hover{
+        cursor:pointer;
+    }
+    .main-header {
+        
+        position: fixed;
+        width: 100%;
+      }
+      .card{
+        background-color: white;
+        border: solid 1px ;
+        border-radius: 3px;
+        height: auto;
+        width: 100%;  
+        margin-top: 6%;
+        box-shadow: 10px 10px 5px rgb(71, 69, 69);
+    }
+    .content-wrapper{
+        background-color: white;
+    }
+

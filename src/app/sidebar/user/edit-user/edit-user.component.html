@@ -1,0 +1,111 @@
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <h4> <i class="fas fa-edit "></i> &nbsp;&nbsp;<b>Edit User</b></h4>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="userUpdate" class="form-horizontal userUpdate_form form-align">
+                <label for="inputUserName" class="control-label col-xs-3">User
+                    Name <i class="fa fa-asterisks text-danger">*</i>
+                </label>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <input type="text" name="username" class="form-control" maxlength="50" id="inputUserName"
+                            placeholder="User Name" value="" formControlName="username" readonly="readonly"
+                            [(ngModel)]="user.username">
+
+                        <div class="alert alert-danger"
+                            *ngIf="userUpdate.get('username').touched && userUpdate.get('username').invalid">Please
+                            Provid User Name.</div>
+                    </div>
+                    <input type="hidden" id="userid" value="userType">
+                </div>
+
+
+                <label for="selectDesignation" class="control-label col-xs-3">User Type <i
+                        class="fa fa-asterisks text-danger">*</i></label>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <select class="selectpicker form-control " id="selectDesignation" name="userType"
+                            formControlName="userType" (change)="selectDesignation($event)" id="userType"
+                            [(ngModel)]="designationId">
+                            <option value="" disabled>Choose a User Type</option>
+                            <option value="{{designation.designationId}}" *ngFor="let designation of desig" [ngValue]>
+                                {{designation.designationName}}</option>
+                        </select>
+                        <div class="alert alert-danger"
+                            *ngIf="userUpdate.get('userType').touched && userUpdate.get('userType').invalid">Please
+                            Choose an Option.</div>
+                    </div>
+                </div>
+
+                <label for="inputDisplayname" class="control-label col-xs-3">Display
+                    Name<i class="fa fa-asterisks text-danger">*</i>
+                </label>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <input type="text" name="displayname" class="form-control" id="inputDisplayname" value=""
+                            placeholder="Display Name" maxlength="50" formControlName="displayName" [(ngModel)]="user.displayName">
+                        <div class="alert alert-danger"
+                            *ngIf="userUpdate.get('displayName').touched && userUpdate.get('displayName').invalid">
+                           
+                            <div *ngIf="userUpdate.get('displayName').errors.required">Display Name Required</div>
+                            <div *ngIf="userUpdate.get('displayName').errors.maxlength">Display Name Should Contains AtMost 50 character
+                            </div>
+                            <div *ngIf="userUpdate.get('displayName').errors.pattern">Display Name should contains only alphabets</div>
+                        </div>
+                    </div>
+                </div>
+
+                <label for="inputEmail" class="control-label col-xs-3">Email <i
+                        class="fa fa-asterisks text-danger">*</i></label>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <input type="text" name="email" class="form-control" id="inputEmail" value=""
+                            placeholder="Email" (keyup)="checkEmailId($event)" formControlName="email" [(ngModel)]="user.email">
+                        <div class="alert alert-danger"
+                            *ngIf="userUpdate.get('email').touched && userUpdate.get('email').invalid">Please Provid
+                            <div *ngIf="userUpdate.get('email').errors.required">Email Address Required </div>
+                            <div *ngIf="userUpdate.get('email').errors.pattern">Please provide valid Email</div>
+                        </div>
+                        <div *ngIf="emailIdAlreadyExist" class="alert alert-danger"> Email Id is Already Exist...Please
+                            Change the Email Id</div>
+                    </div>
+                </div>
+                <label for="inputMobile" class="control-label col-xs-3">Mobile<i
+                        class="fa fa-asterisks text-danger">*</i></label>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <input type="text" name="mobile" maxlength="10" class="form-control" id="user_inputMobile" value=""
+                            placeholder="Mobile" formControlName="mobile" [(ngModel)]="user.mobile">
+                        <div class="alert alert-danger"
+                            *ngIf="userUpdate.get('mobile').touched && userUpdate.get('mobile').invalid">Please
+                            <div *ngIf="userUpdate.get('mobile').errors.required">Mobile Number Is Required</div>
+                            <div *ngIf="userUpdate.get('mobile').errors.pattern">Please provide the mobile number which consists of 10 number</div>
+                        
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row text-center">
+
+                    <div class="row ">
+                        <div class="col-md-7">
+                            <button type="submit" class="btn btn-primary" id="cancel" (click)="updateClient()"
+                                [disabled]="userUpdate.invalid">
+                                <i class="glyphicon glyphicon-save"></i>  Update
+                            </button>
+                        </div>
+
+                        <div class=" col-md-1">
+                            <button type="button" class="btn btn-primary " id="back" (click)="cancell()">
+                                <i class="glyphicon glyphicon-remove"></i>Cancel
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

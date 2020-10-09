@@ -1,0 +1,105 @@
+<div class="container-fluid">
+  <h3 class="text-center">Service Invoice Details</h3>
+  <div class="card">  
+    <div class="card-header">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Search here...">
+        <!-- <i class="fa fa-search" aria-hidden="true"></i> -->
+      </mat-form-field>
+    </div> 
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!-- Position Column-->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> Sl No. </th>
+        <td mat-cell *matCellDef="let element;">{{dataSource.filteredData.indexOf(element) + 1}}.</td>
+      </ng-container>
+
+      <ng-container matColumnDef="invoiceId">
+        <th mat-header-cell *matHeaderCellDef [hidden]="show"> invoiceId</th>
+        <td mat-cell *matCellDef="let element" [hidden]="show"> {{element.invoiceId}}</td>
+      </ng-container>
+
+
+      <!-- <ng-container matColumnDef="client">
+        <th mat-header-cell *matHeaderCellDef > client</th>
+        <td mat-cell *matCellDef="let element" > {{element.client.clientId}}</td>
+      </ng-container> -->
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="clientName">
+        <th mat-header-cell *matHeaderCellDef> Client Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.clientName}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="clientType">
+        <th mat-header-cell *matHeaderCellDef> Client Type </th>
+        <td mat-cell *matCellDef="let element"> {{element.clientType}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="gstType">
+        <th mat-header-cell *matHeaderCellDef> GST Type </th>
+        <td mat-cell *matCellDef="let element"> {{element.gstType}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="particulars">
+        <th mat-header-cell *matHeaderCellDef> Particulars </th>
+        <td mat-cell *matCellDef="let element"> {{element.particulars}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="particularsAmount">
+        <th mat-header-cell *matHeaderCellDef> Particulars Amount </th>
+        <td mat-cell *matCellDef="let element"> {{element.particularsAmount}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="invoiceDate">
+        <th mat-header-cell *matHeaderCellDef> Invoice Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.invoiceDate}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="invoiceAmount">
+        <th mat-header-cell *matHeaderCellDef> Invoice Amount </th>
+        <td mat-cell *matCellDef="let element"> {{element.invoiceAmount}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="totalAmount">
+        <th mat-header-cell *matHeaderCellDef> Total Amount </th>
+        <td mat-cell *matCellDef="let element"> {{element.totalAmount}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="invoiceNo">
+        <th mat-header-cell *matHeaderCellDef> Invoice No </th>
+        <td mat-cell *matCellDef="let element"> {{element.invoiceNo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="icons">
+        <th mat-header-cell *matHeaderCellDef> Edit </th>
+        <td mat-cell *matCellDef="let element" (click)="editInvoice(this.element.invoiceId)"><a class="edit"
+            title="Edit" data-toggle="tooltip"><i class="fa fa-edit"></i></a></td>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="icons">
+        <th mat-header-cell *matHeaderCellDef> Edit </th>
+        <td mat-cell *matCellDef="let element" *ngIf="{{this.element.clientType == 'OneTime'}}" (click)="editInvoice(this.element.invoiceId,this.element.client.clientName,this.element.clientType")><a class="edit"
+            title="Edit" data-toggle="tooltip"><i class="fa fa-edit"></i></a></td>
+      </ng-container> -->
+
+      <ng-container matColumnDef="icon">
+        <th mat-header-cell *matHeaderCellDef> Delete </th>
+        <td mat-cell *matCellDef="let element" (click)="deleteInvoice(this.element.invoiceId)"><a class="delete"
+            title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a></td>
+      </ng-container> 
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+  <br><br>
+</div>

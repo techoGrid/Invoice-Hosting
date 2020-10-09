@@ -1,0 +1,53 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header">
+      <h4>
+        <i class="fa fa-times-circle" aria-hidden="true"></i>&nbsp;&nbsp;<b>Date Selection For Invoice Report</b>
+      </h4>
+    </div>
+    <div class="card-body">
+      <div class="box-content row">
+        <div class="col-md-9">
+          <div class="form-group">
+            <div class="row">
+
+              <div class="col-md-5 ">
+                <mat-form-field>
+                
+                   <input matInput [matDatepicker]="picker" placeholder=" From Date">
+        
+            
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                
+               </mat-form-field> 
+
+              </div> 
+
+              <div  class="col-md-5">
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker1" placeholder="To Date">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
+               </div>
+
+
+               <div class="col-xs-offset-4" style="margin-left: 12%;">
+                
+                        <button class="btn btn-primary submit_button" style="width: 130px">
+                            <i class="glyphicon glyphicon-ok"></i><span> Apply Dates</span>
+                        </button>
+                    
+                        
+            </div>
+            </div>  
+            
+            
+        </div>
+
+        
+      </div>
+    </div>
+  </div>
+</div>

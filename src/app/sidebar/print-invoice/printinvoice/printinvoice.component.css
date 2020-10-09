@@ -1,0 +1,43 @@
+h4{
+    font-size: 15px;
+    margin:0;
+    text-align: center;
+}
+.submit-btn {
+    outline: 0;
+    border-radius: 4px;
+    padding: 5px 40px 5px 40px;
+  }
+.card-header{
+    background-color: lightgray;
+    border: solid 1px ;
+    width: 100%;
+    padding:5px;
+    padding-left: 10px;
+}
+.card{
+    border: solid 1px ;
+    border-radius: 3px;
+    height: auto;
+    width: 100%;  
+    margin-top: 7%;
+    margin-bottom: 8%;
+    box-shadow: 10px 10px 5px rgb(71, 69, 69);
+}
+th{
+    background: linear-gradient(rgb(162, 210, 238),rgb(130, 184, 197));
+}
+/* .card-body{
+    margin-top: 5px; 
+    margin-bottom: 15px;
+    padding-bottom: 20px;
+} */
+/* input[type="text"],[type="email"],select{
+    border-radius: 10px;
+    width: 30%;
+} */
+.btn{
+    text-align: center;
+    margin-left: 48%;
+    margin-bottom: 2%;
+}

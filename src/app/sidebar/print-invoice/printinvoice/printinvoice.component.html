@@ -1,0 +1,156 @@
+<div class="container-fluid" id="invoiceId">
+  <div class="card">
+    <div class="card-header">
+      <h4>
+        <i class="fa fa-print" aria-hidden="true"></i>&nbsp;&nbsp;<b>Invoice GST For Print</b>
+      </h4>
+    </div>
+    <div class="card-body">
+      <div class="box-content" id="tablediv" style="overflow: auto; ">
+        <div class="box col-md-12" *ngIf='invoiceDetails'>
+          <div class="box-inner">
+            <table id="myTableData" class="table table-bordered ">
+              <thead>
+                <tr>
+                  <th class="text-left" colspan="10"> COMPANY NAME &nbsp;: &nbsp;&nbsp;<br><span
+                      style="font-size: 13px;"></span></th>
+                </tr>
+              </thead>
+              <tbody style="font-size: 14px;">
+                <tr>
+                  <td style="text-align: left;" colspan="10"><strong>Our GSTIN &nbsp;:&nbsp;&nbsp;</strong> XXXXXXXXX
+                  </td>
+                </tr>
+
+                <tr>
+                  <td style="text-align: left;" colspan="8"><strong> Bill
+                      No &nbsp;: &nbsp;</strong>&nbsp;{{invoiceDetails.invoiceNo}}</td>
+                  <td style="text-align: center; " colspan="2"> <strong>Date:</strong>
+                    &nbsp;{{invoiceDetails.invoiceDate}}</td>
+                </tr>
+
+
+                <tr>
+                  <td style="text-align: left;" colspan="4"> <strong>To,</strong><br>
+                    <strong>Client Name&nbsp; : &nbsp;&nbsp;</strong>{{invoiceDetails.clientName}}<br>
+                    <strong>Address &nbsp; : &nbsp;&nbsp;</strong> {{invoiceDetails.clientAddress}}
+                    <br><strong>GSTIN &nbsp;: &nbsp;&nbsp;</strong>&nbsp;{{invoiceDetails.gstin}}</td>
+                  <td style="text-align: center;" colspan="6"></td>
+                </tr>
+
+                <tr>
+                  <td style="text-align: left;" colspan="10">Dear Sir/Madam,</td>
+                </tr>
+
+                <tr>
+                  <td style="text-align: center; font-weight: bold;" colspan="10"><u> </u></td>
+                </tr>
+
+
+                <tr style="border: 2px solid #353535;">
+                  <td style="text-align: center; font-weight: bold; border-right: 2px solid #353535; width: 80px;"
+                    colspan="1">Sl.No</td>
+                  <td style="text-align: center; font-weight: bold; border-right: 2px solid #353535; width: 420px;"
+                    colspan="6">Particulars</td>
+                  <td style="text-align: left; font-weight: bold; border-right: 2px solid #353535;" colspan="2">Amount
+                    (INR)</td>
+                </tr>
+
+                <tr  style="border: 2px solid #353535;" *ngFor="let invoice of invoiceArray; let i = index;">
+                  <td
+                    style="text-align: center;  border-left: 2px solid #353535;"
+                    colspan="1">
+                    &nbsp;{{i+1}}.</td>
+                  <td
+                    style="text-align: right; border-left: 2px solid #353535; border-left: 2px solid #353535;"
+                    colspan="6">
+                    &nbsp;{{invoice.particulars}}</td>
+                  <td style="text-align: right; border-left: 2px solid #353535; border-right: 2px solid #353535;"
+                    colspan="2">
+                    &nbsp;{{invoice.particularsAmount}}</td>
+                </tr>
+                
+
+                <tr style="border: 2px solid #353535;">
+                  <td style="text-align: right; font-weight: bold;" colspan="7">Sub-Total Amount</td>
+                  <td style="text-align: right;  border-left: 2px solid #353535;  border-right: 2px solid #353535;"
+                    colspan="2">
+                    &nbsp;{{invoiceDetails.invoiceAmount}}</td>
+                </tr>
+
+                <tr *ngIf="cgstAndSgstFlag" style="border: 2px solid #353535;">
+                  <td style="text-align: right;" colspan="8">Add: CGST @ &nbsp;{{invoiceDetails.cgstPercentage}}</td>
+                  <td style="text-align: right; border-left: 2px solid #353535;" colspan="2">
+                    &nbsp;{{invoiceDetails.cgstAmount}}</td>
+
+                </tr>
+                <tr *ngIf="cgstAndSgstFlag" style="border: 2px solid #353535;">
+                  <td style="text-align: right;" colspan="8">Add: SGST @ &nbsp;{{invoiceDetails.sgstPercentage}} </td>
+                  <td style="text-align: right; border-left: 2px solid #353535;" colspan="2">
+                    &nbsp;{{invoiceDetails.sgstAmount}}</td>
+                </tr>
+
+                <tr *ngIf="igstFlag" style="border: 2px solid #353535;">
+                  <td style="text-align: right;" colspan="8">Add: IGST @ &nbsp;{{invoiceDetails.igstPercentage}} </td>
+                  <td style="text-align: right; border-left: 2px solid #353535; border-right: 2px solid #353535;"
+                    colspan="1">
+                    &nbsp;{{invoiceDetails.igstAmount}}</td>
+                </tr>
+
+
+                <tr style="border: 2px solid #353535;">
+                  <td style="text-align: left; font-weight: bold;" colspan="8">(Rupees) </td>
+                  <td style="text-align: right; font-weight: bold; border-left: 2px solid #353535;" colspan="2">
+                    &nbsp;{{invoiceDetails.totalAmount}}</td>
+                </tr>
+
+
+                <tr>
+                  <td style="text-align: center;" colspan="10" rowspan="2"></td>
+                </tr>
+                <tr></tr>
+
+                <tr>
+                  <td style="text-align: left; font-weight: bold;" colspan="10"><span style="font-weight: normal;">for
+                      <br></span> COMPANY NAME &nbsp;&nbsp;: <br><span style="font-size: 13px;"> </span></td>
+                  <!-- <td style="text-align: center;" colspan="6" rowspan="3"></td> -->
+                </tr>
+                <!-- <tr>
+                  <td style="text-align: left;" colspan="4"></td>
+                </tr> -->
+                <tr>
+                  <td style="text-align: left; font-weight: bold;" colspan="10">Authorised&nbsp;Signatory</td>
+                </tr>
+
+                <!-- <tr>
+                  <td style="text-align: center;" colspan="10"></td>
+                </tr> -->
+
+                <tr>
+                  <td style="text-align: center; font-weight: bold; background-color: lightgray;" colspan="10">ADDRESS
+                    :Bansankari
+                    <br>Phone : 9865854634
+                    E-mail : developers.vetologic@gmail.com
+                  </td>
+                </tr>
+
+              </tbody>
+
+            </table>
+
+            <div class="row" id="print">
+              <div class="form-inline center">
+                <button type="submit" class="btn btn-primary ca_button" target="_blank"
+                  (click)="printInvoice('invoiceId')">
+                  <span class="fa fa-print"></span> &nbsp;Print&nbsp;
+                </button>
+                <button type="submit" class="btn btn-primary ca_button" target="_blank"
+                  (click)="Back()">
+                  <span class="fa fa-print"></span> &nbsp;Back&nbsp;
+                </button>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>

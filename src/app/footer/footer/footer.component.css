@@ -1,0 +1,19 @@
+.footer
+{
+   bottom: 0px;
+   left: 0px;
+   right: 0px;
+   margin-bottom: 0px;
+   position: fixed;
+   background-color: rgb(41, 104, 167);
+   padding: 10px;
+   color:white;
+}
+a{
+    color:rgb(211, 182, 182);
+}
+strong
+{
+    margin-left: 43%;
+    color: white;
+}

@@ -1,0 +1,126 @@
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { MatTableDataSource } from "@angular/material/table";
+import { MatPaginator } from "@angular/material/paginator";
+import { InvoiceService } from 'src/app/Service/invoice.service';
+import { Router } from "@angular/router";
+import { AuthenticationService } from 'src/app/Service/authentication.service';
+
+
+export interface InvoiceList {
+  clientName: string;
+  position: number;
+  clientType: string;
+  gstType: string;
+  particulars: number;
+  totalAmount: number;
+  invoiceDate: string;
+  invoiceNo: string;
+  invoiceAmount: number;
+  icons: string;
+  icon: string;
+  invoiceId: number;
+  invoiceType: string;
+  month: string;
+  year: string;
+  client: any;
+  financialYear: string;
+  cgstAmount: string;
+  sgstAmount: string;
+  igstAmount: string;
+  cgstPercentage: string;
+  sgstPercentage: string;
+  igstPercentage: string;
+  clientAddress: string;
+  modifyRemarks: string;
+  deleteRemarks: string;
+  particularsAmount: number;
+  gstin: string;
+}
+
+@Component({
+  selector: "app-delete-invoice",
+  templateUrl: "./delete-invoice.component.html",
+  styleUrls: ["./delete-invoice.component.css"],
+})
+export class DeleteInvoiceComponent implements OnInit {
+  displayedColumns: string[] = [
+    "position",
+    "clientName",
+    "invoiceId",
+    //"client",
+    "clientType",
+    "gstType",
+    "totalAmount",
+    "particulars",
+    "particularsAmount",
+    "invoiceDate",
+    "invoiceNo",
+    "invoiceAmount",
+    "icons",
+    "icon",
+  ];
+  role: string;
+  dataSource: MatTableDataSource<InvoiceList>;
+  constructor(private invoiceService: InvoiceService, private route: Router, private authentication: AuthenticationService) {
+    this.role = this.authentication.getLoggedUserRole();
+  }
+  /* Filter Logic*/
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
+  ngOnInit() {
+  
+    if (this.role === "ROLE_ADMIN") {
+      this.getAllInvoiceForDelete();
+    } else if (this.role === "ROLE_USER") {
+      this.invoiceService.getAllInvoiceBasedCurrentUser().subscribe((respons) => {
+        this.dataSource = new MatTableDataSource(respons);
+        this.dataSource.paginator = this.paginator;
+      });
+    }
+
+  }
+
+  
+  getAllInvoiceForDelete() {
+    this.invoiceService.getAllInvoice().subscribe((respons) => {
+      this.dataSource = new MatTableDataSource(respons);
+      this.dataSource.paginator = this.paginator;
+    });
+  }
+  
+
+
+  show: boolean = true;
+  invoice: any;
+  deleteInvoice(invoiceId: number) {
+    if (confirm(`Are you sure to delete this invoice ?`)) {
+      this.invoiceService
+        .deleteInvoice(invoiceId)
+        .subscribe((response) => {
+          (this.invoice = response)
+          if (response.success) {
+            alert(response.message)
+            this.getAllInvoiceForDelete();
+	    this.reloadComponent()
+          }
+        });
+    }
+  }
+
+  editInvoice(id: number): void {
+    this.route.navigate(["default/editInvoice", id]);
+  }
+
+  reloadComponent(){
+    this.route.routeReuseStrategy.shouldReuseRoute=() =>false;
+    this.route.onSameUrlNavigation='reload';
+    this.route.navigate(['default/deleteInvoice'])
+  }
+}

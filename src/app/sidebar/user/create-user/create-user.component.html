@@ -1,0 +1,104 @@
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <h4><i class="fa fa-user-plus"></i>&nbsp;&nbsp;<b>Create User</b></h4>
+        </div>
+        <div class="card-body">
+
+            
+            <form [formGroup]="userCreation" class="form-horizontal userUpdate_form form-align">
+                <label for="username" class="control-label col-xs-3">User
+                    Name <i class="fa fa-asterisks text-danger">*</i>
+                </label> 
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <input type="text" name="username" class="form-control" maxlength="50" id="username" placeholder="User Name"
+                            value="" (keyup)="checkUserName($event)" formControlName='username' #uName>
+                        <div *ngIf='username.invalid && (username.dirty || username.touched)'
+                            class="alert alert-danger">
+                            <div *ngIf='username.errors.required'>User Name Required</div>
+                            <div *ngIf='username.errors.maxlength'>User Name Should Contains AtMost 50 character</div>
+                            <div *ngIf='username.errors.pattern'>User Name should contains only alphabets</div>
+                        </div>
+                        <div *ngIf="userNameAlreadyExist" class="alert alert-danger"> User Name is Already
+                            Exist...Please
+                            Change the User Name</div>
+                    </div>
+                </div>
+
+
+                <label for="selectDesignation" class="control-label col-xs-3">User Type <i
+                        class="fa fa-asterisks text-danger">*</i></label>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <select class="selectpicker form-control " id="selectDesignation" name="userType"
+                            formControlName="userType" (change)="selectDesignation($event)" id="userType">
+                            <option value="null" disabled>Choose a User Type</option>
+                            <option value="{{designation.designationId}}" *ngFor="let designation of desig" [ngValue]>
+                                {{designation.designationName}}</option>
+                        </select>
+                        <div class="alert alert-danger"
+                            *ngIf="userCreation.get('userType').touched && userCreation.get('userType').invalid">Please
+                            Choose an Option.</div>
+                    </div>
+                </div>
+
+                <label for="displayName" class="control-label col-xs-3">Display
+                    Name<i class="fa fa-asterisks text-danger">*</i>
+                </label>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <input type="text" name="displayname" class="form-control" maxlength="50" id="displayName" value=""
+                            placeholder="Display Name" formControlName='displayName' #dName>
+                        <div *ngIf='displayName.invalid && (displayName.dirty || displayName.touched)'
+                            class="alert alert-danger">
+                            <div *ngIf='displayName.errors.required'>Display Name Required</div>
+                            <div *ngIf='displayName.errors.maxlength'>Display Name Should Contains AtMost 50 character
+                            </div>
+                            <div *ngIf='displayName.errors.pattern'>Display Name should contains only alphabets</div>
+                        </div>
+                    </div>
+                </div>
+
+                <label for="email" class="control-label col-xs-3">Email <i
+                        class="fa fa-asterisks text-danger">*</i></label>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <input type="text" name="email" class="form-control" id="email" value="" placeholder="Email"
+                            (keyup)="checkEmailId($event)" formControlName='emailId' #email>
+                        <div *ngIf='emailId.invalid && (emailId.dirty || emailId.touched)' class="alert alert-danger">
+                            <div *ngIf='emailId.errors.required'>Email Address Required </div>
+                            <div *ngIf='emailId.errors.pattern'>Please provide valid Email</div>
+                        </div>
+                        <div *ngIf="emailIdAlreadyExist" class="alert alert-danger"> Email Id is Already Exist...Please
+                            Change the Email Id</div>
+                    </div>
+                </div>
+                <label for="inputMobile" class="control-label col-xs-3">Mobile<i
+                        class="fa fa-asterisks text-danger">*</i></label>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <input type="text" name="mobile"  maxlength="10" class="form-control" id="user_inputMobile" value=""
+                            placeholder="Mobile" formControlName="mobile" #mobile>
+                        <div *ngIf="userCreation.get('mobile').invalid && (userCreation.get('mobile').touched || userCreation.get('mobile').dirty)" class="alert alert-danger">
+                           
+                            <div *ngIf="userCreation.get('mobile').errors.required">Mobile Number Is Required</div>
+                            <!-- <div *ngIf="userCreation.get('mobile').minlength">Mobile Number Should Contains Exactly 10 Numbers -->
+                            <!-- </div> -->
+                            <div *ngIf="userCreation.get('mobile').errors.pattern">Please provide the mobile number which consists of 10 number</div>
+                        
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row text-center">
+                    <div class="btn">
+                        <button type="submit" class="btn btn-primary" id="creteUser" [disabled]="userCreation.invalid"
+                            (click)="createUser(uName.value,dName.value,email.value , mobile.value )">Create
+                            User</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

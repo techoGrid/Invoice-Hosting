@@ -1,0 +1,333 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header">
+      <h4><i class="fa fa-user-plus"></i>&nbsp;&nbsp;<b>Create Invoice</b></h4>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <form [formGroup]="invoiceCreation" class="form-horizontal Service-Invoice-Create form-align"
+          id="service-Invoice-Create">
+
+          <div class="col-md-9">
+            <label class="control-label col-md-offset-1 col-md-2" style="padding-top:20px;">Customer Type <i
+                class="fa fa-asterisks text-danger">*</i><span class="asterisk_input"></span></label>
+            <div class="form-group">
+              <div class="form-group " style="float: left">
+                <div class="col-sm-6">
+                  <input class="col-xs-6" type='radio' name='clientType' value="Regular" id='regularClient'
+                    formControlName="clientType"
+                    style="margin: 10px;height:35px; width:35px; vertical-align: middle; outline: none;" checked />
+                </div>
+              </div> <label class="control-label col-xs-1" style="padding-top:20px;">Regular</label>
+
+              &nbsp;&nbsp; <div class="form-group " style="float: left">
+                <div class="col-sm-6">
+                  <input class="col-xs-6" type='radio' name='clientType' value="OneTime" id='oneTimeClient'
+                    style="margin: 10px;height:35px; width:35px; vertical-align: middle; outline: none;"
+                    formControlName="clientType" />
+                </div>
+              </div><label class="control-label col-xs-1" style="padding-top:20px;float: left;">OneTime</label>
+            </div>
+            <label for="GSTType" class="control-label col-md-offset-1 col-md-2">GST Type <i
+                class="fa fa-asterisks text-danger">*</i><span class="asterisk_input"></span></label>
+            <div class="form-group">
+              <div class="col-xs-5">
+                <select class="selectpicker form-control " id="gstType" name="gstType" #gstType
+                  (change)="dispalayInvoice(this.gstType.value);" style="margin-left: 0px;" formControlName="gstType">
+                  <option value="" disabled>Select Option</option>
+                  <option value="Local">Local</option>
+                  <option value="Interstate">Interstate</option>
+                </select>
+                <span style="color: red;"
+                  *ngIf="invoiceCreation.get('gstType').touched && invoiceCreation.get('gstType').invalid">This Filed Is
+                  Required</span>
+              </div>
+            </div>
+
+            <div id="clientNameDisplayDropDown">
+              <label class="control-label col-md-offset-1 col-md-2">Client Name<i
+                  class="fa fa-asterisks text-danger">*</i>
+                <span class="asterisk_input"></span></label>
+              <div class="form-group">
+                <div class="col-xs-5">
+                  <select class="selectpicker form-control " id="clientId" style="margin-left: 0px;"
+                    formControlName="clientName" (change)="selectClient($event)" #cId>
+                    <option value="" disabled>Select a User Type</option>
+                    <option value="{{com.clientId}}" *ngFor="let com of client" [ngValue]>{{com.clientname}}
+                    </option>
+                  </select>
+
+                  <div style="color: red;"
+                    *ngIf="invoiceCreation.get('clientName').touched && invoiceCreation.get('clientName').invalid">
+                    <div *ngIf='clientName.errors.required'>Client Name Required</div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-offset-1 col-md-5">
+            <div id="clientNameDisplay" style="display: none;">
+              <label class="control-label col-xs-3" style="margin-left: 0px;">Client Name<i
+                  class="fa fa-asterisks text-danger">*</i>
+                <span class="asterisk_input"></span>
+              </label>
+              <div class="form-group">
+                <div class="col-xs-6">
+                  <input class="form-control" type="text" name="clientName" id="clientName"
+                    formControlName="clientName">
+                </div>
+                <span style="color: red;"
+                  *ngIf="invoiceCreation.get('clientName').touched && invoiceCreation.get('clientName').invalid">
+                  <div *ngIf="invoiceCreation.get('clientName').errors.required">
+                    This
+                    Filed Is
+                    Required
+                  </div>
+                  <div *ngIf="invoiceCreation.get('clientName').errors.pattern">Client Name should contains
+                    only alphabets
+                  </div>
+                </span>
+              </div>
+            </div>
+            <div id="gstinDisplay" style="display: none;">
+              <label class="control-label col-xs-3">GSTIN</label>
+              <div class="form-group">
+                <div class="col-xs-6">
+                  <input class="form-control" type="text" name="gstin" id="gstin" maxlength="15"
+                    formControlName="gstin">
+                </div>
+
+                <span style="color: red;"
+                  *ngIf="invoiceCreation.get('gstin').touched && invoiceCreation.get('gstin').invalid">
+                  <div *ngIf="invoiceCreation.get('gstin').errors.pattern">Please enter the valid GSTIN formate
+                  </div>
+                </span>
+
+
+              </div>
+            </div>
+          </div>
+          <input class="form-control" type="hidden" name="particulars" id="particulars" />
+          <input class="form-control" type="hidden" name="particularsAmount" id="particularsAmount" />
+
+          <div class="col-md-offset-1 col-md-7"><br>
+            <table id="particularsTable" class="table table-bordered responsive">
+              <thead>
+                <tr>
+                  <th>Particulars <i class="fa fa-asterisks text-danger">*</i></th>
+                  <th>Amount <i class="fa fa-asterisks text-danger">*</i> </th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let dynamic of dynamicArray; let i = index;">
+                  <td>
+                    <input style="font-weight: lighter;" [(ngModel)]="dynamic.particulars" id="particulars{{i}}"
+                      name="particularsRowName" ng-keypress="return checkIt(event);" class="form-control" type="text"
+                      formcontrolName="particulars" required [ngModelOptions]="{standalone: true}"
+                      (input)="validateInvoiceParticularDetails(i);" />
+                    <p style="color: red;" id="perticularMsg{{i}}"></p>
+                    <!-- (input)="particularsRowName($event)" -->
+                  </td>
+                  <td>
+
+                    <input class="form-control" style="font-weight: lighter;" [(ngModel)]="dynamic.particularsAmount"
+                      type="text" id="particularsAmount{{i}}" name="particularsRowAmount"
+                      (input)="calculateSumOfInvoiceAmounts();" formcontrolName="particularsAmount"
+                      [ngModelOptions]="{standalone: true}" (input)="validateInvoiceParticularDetails(i);" />
+                    <p style="color: red;" id="perticularAmountMsg{{i}}"></p>
+
+                    <!-- <span style="color: red;"
+                      *ngIf="invoiceCreation.get('particularsAmount').touched && invoiceCreation.get('particularsAmount').invalid">This
+                      Filed Is
+                      Required</span> -->
+
+                    <!-- [ngModelOptions]="{standalone: true}" -->
+                  </td>
+                  <td *ngIf="i == 0 ; else add_delete" (click)="addRow()">
+                    <i class="fa fa-plus fa-2x"></i>
+
+                  </td>
+                  <ng-template #add_delete>
+                    <td (click)="deleteRow(i)">
+                      <i class="fa fa-trash fa-2x"></i>
+                    </td>
+                  </ng-template>
+
+                </tr>
+              </tbody>
+            </table>
+            <div>
+
+            </div><br>
+          </div>
+
+
+
+          <div class="col-md-offset-1 col-md-5">
+            <div id="clientAddressDisplay" style="display: none;">
+              <label class="control-label col-xs-4">Client Address
+                <span class="asterisk_input"></span>
+              </label>
+              <div class="form-group">
+                <div class="col-xs-6">
+                  <textarea rows="2" name="clientAddress" id="clientAddress" style="width: 100%;"
+                    formControlName="clientAddress"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <label class="control-label col-xs-4">Invoice Date <i class="fa fa-asterisks text-danger">*</i>
+            </label>
+            <div class="form-group">
+              <div class="col-xs-6">
+                <span class='input-group date'>
+                  <input type='date' style="position: static;" class="form-control" id="invoiceDate" name="invoiceDate"
+                    formControlName="invoiceDate" >
+
+                  <!-- <span class="input-group-addon">
+                    <span class="fa fa-calendar-o" id="btnPicker1"></span>
+                  </span> -->
+                </span>
+                <span style="color: red;"
+                  *ngIf="invoiceCreation.get('invoiceDate').touched && invoiceCreation.get('invoiceDate').invalid">This
+                  Filed Is
+                  Required</span>
+
+              </div>
+            </div>
+
+            <label class="control-label col-xs-4">Invoice Amount</label>
+            <div class="form-group">
+              <div class="col-xs-6">
+                <input class="form-control" type="text" name="invoiceAmount" #invoiceAmount id="invoiceAmount"
+                  readonly="readonly" formControlName="invoiceAmount">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-offset-1 col-md-9">
+            <div id="cgstAndSgst">
+              <div style="float: left" class="col-sm-5">
+                <label class="control-label col-xs-4" style="margin: 0px 0px 0px -15px;">CGST&nbsp;% <i
+                    class="fa fa-asterisks text-danger">*</i></label>
+                <div class="form-group">
+                  <div class="col-xs-5">
+                    <input class="form-control" style="margin: 0px 0px 0px 39%;" type="text" name="cgstPercentage"
+                      id="cgstPercentage" ng-keyup="return validateNumeric(this.value);" (input)="calculation();"
+                      formControlName="cgstPercentage">
+                    <span style="color: red;"
+                      *ngIf="invoiceCreation.get('cgstPercentage').touched && invoiceCreation.get('cgstPercentage').invalid">This
+
+                      <div *ngIf="invoiceCreation.get('cgstPercentage').errors.required"> Filed Is
+                        Required</div>
+
+                      <div *ngIf="invoiceCreation.get('cgstPercentage').errors.pattern"> Please enter only numbers</div>
+
+
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div style="float: left" class="col-sm-5">
+                <label class="control-label col-xs-4">CGST Amount</label>
+                <div class="form-group">
+                  <div class="col-xs-5">
+                    <input class="form-control" style="margin: 0px 0px 0px 39%;" type="text" name="cgstAmount"
+                      #cgstAmount id="cgstAmount" readonly="readonly" formControlName="cgstAmount">
+                  </div>
+                </div>
+              </div><br>
+              <div style="float: left" class="col-sm-5">
+                <label class="control-label col-xs-4" style="margin: 0px 0px 0px -15px;">SGST&nbsp;%<i
+                    class="fa fa-asterisks text-danger">*</i></label>
+                <div class="form-group">
+                  <div class="col-xs-5">
+                    <input class="form-control" style="margin: 0px 0px 0px 39%;" type="text" name="sgstPercentage"
+                      #sgstPercentage id="sgstPercentage" ng-keyup="return validateNumeric(this.value);"
+                      (input)="calculation();" formControlName="sgstPercentage">
+
+                    <span style="color: red;"
+                      *ngIf="invoiceCreation.get('sgstPercentage').touched && invoiceCreation.get('sgstPercentage').invalid">This
+                      <div *ngIf="invoiceCreation.get('sgstPercentage').errors.required"> Filed Is
+                        Required</div>
+
+                      <div *ngIf="invoiceCreation.get('sgstPercentage').errors.pattern"> Please enter only numbers</div>
+
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div style="float: left" class="col-sm-5">
+                <label class="control-label col-xs-4">SGST Amount</label>
+                <div class="form-group">
+                  <div class="col-xs-5">
+                    <input class="form-control" style="margin: 0px 0px 0px 39%;" type="text" name="sgstAmount"
+                      #sgstAmount id="sgstAmount" readonly="readonly" formControlName="sgstAmount">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="igst">
+              <div style="float: left" class="col-sm-5">
+                <label class="control-label col-xs-4" style="margin: 0px 0px 0px -15px;">IGST&nbsp;% <i
+                    class="fa fa-asterisks text-danger">*</i>
+                </label>
+                <div class="form-group">
+                  <div class="col-xs-5">
+                    <input class="form-control" style="margin: 0px 0px 0px 39%;" type="text" name="igstPercentage" x
+                      #igstPercentage id="igstPercentage" ng-keyup="return validateNumeric(this.value);"
+                      (input)="calculation();" formControlName="igstPercentage">
+
+                    <span style="color: red;"
+                      *ngIf="invoiceCreation.get('igstPercentage').touched && invoiceCreation.get('igstPercentage').invalid">This
+
+                      <div *ngIf="invoiceCreation.get('igstPercentage').errors.required"> Filed Is
+                        Required</div>
+
+                      <div *ngIf="invoiceCreation.get('igstPercentage').errors.pattern"> Please enter only numbers</div>
+
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div style="float: left" class="col-sm-5">
+                <label class="control-label col-xs-4">IGST Amount</label>
+                <div class="form-group">
+                  <div class="col-xs-5">
+                    <input class="form-control" style="margin: 0px 0px 0px 39%;" type="text" name="igstAmount"
+                      id="igstAmount" #igstAmount readonly="readonly" formControlName="igstAmount">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-offset-1 col-md-5">
+            <label class="control-label col-xs-4">Total Amount</label>
+            <div class="form-group">
+              <div class="col-xs-6">
+                <input class="form-control" type="text" name="totalAmount" id="totalAmount" #totalAmount
+                  readonly="readonly" formControlName="totalAmount">
+              </div>
+            </div>
+          </div>
+
+          <br><br>
+
+          <!-- <input type="hidden" name="invoiceType" formControlName="invoiceType" value="ServiceInvoice" /> -->
+          <input type="hidden" name="customerType" id="customerType" #customerType value="" />
+
+          <div class="col-xs-offset-5 col-sm-4">
+            <button type="submit" class="btn btn-primary" (click)="CreateInvoice()"
+              [disabled]='(invoiceCreation.invalid || !invoiceParticularRowDetailsFlag)'>
+              <!-- <img  style="height: 18px; margin-top: -1px;"> -->
+              Submit
+            </button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>

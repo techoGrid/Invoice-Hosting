@@ -1,0 +1,45 @@
+/* .recoders{
+    padding-top: 20px;
+} */
+/* Structure */
+table {
+  width: 100%;
+}
+th{
+    background: linear-gradient(rgb(162, 210, 238),rgb(130, 184, 197));
+}
+tr:nth-child(even){
+    background-color: lightgray;
+}
+.mat-form-field {
+  font-size: 14px;
+  width: 20%;
+}
+.card-header {
+  background-color:white;
+  border: solid 1px;
+  width: 100%;
+  padding: 2px;
+  padding-left: 10px;
+}
+.card {
+  border: solid 1px;
+  border-radius: 3px;
+  height: auto;
+  width: 100%;
+  margin-top: 1%;
+  box-shadow: 10px 10px 5px rgb(71, 69, 69);
+}
+.card-body {
+  margin-top: 2%;
+  margin-bottom: 15px;
+  padding-bottom: 20px;
+}
+h3{
+  /* padding:5px; */
+  /* margin-bottom: 1%;  */
+  margin-top: 6%;
+  text-shadow: 2px 2px 5px rgb(158, 172, 236);
+  width:30%;
+  margin-left: 35%;
+}
